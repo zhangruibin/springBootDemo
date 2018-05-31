@@ -1,0 +1,37 @@
+server:
+  port: 8081
+  context-path: /
+spring:
+  datasource:
+    continue-on-error: false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    dbcp2:
+    #设置连接池的空闲时间
+      min-evictable-idle-time-millis: 180000
+  thymeleaf:
+    freemarker:
+      prefix:  classpath:/templates/
+    cache: false
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 635983562@qq.com
+    password: 251482784123
+    protocol: smtp
+    default-encoding: utf-8
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+mybatis:
+  mapper-locations: classpath*:mybatis/*Mapper.xml
+  type-aliases-package: com.example.entity
+logging:
+  level:
+    org:
+      springframwork:
+        security: info
+  #config-location:

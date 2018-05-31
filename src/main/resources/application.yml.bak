@@ -1,0 +1,14 @@
+server:
+    port: 8081
+    context-path: /springboot
+my:
+  name: zrb
+  age: 12
+  number:  ${random.int}
+  uuid : ${random.uuid}
+  max: ${random.int(10)}
+  value: ${random.value}
+  greeting: hi,i'm  ${my.name}
+spring:
+  profiles:
+   active: prod

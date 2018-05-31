@@ -1,0 +1,21 @@
+server:
+    port: 8082
+    context-path: /springboot
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update  # 第一次简表create  后面用update
+    show-sql: true
+  thymeleaf:
+  freemarker:
+    prefix:  classpath:/templates/
+mybatis:
+  check-config-location: true
+  type-aliases-package: com.example.entity
+  #config-location: classpath*:mybatis/*Mapper.xml
+  mapper-locations: classpath*:mybatis/*Mapper.xml

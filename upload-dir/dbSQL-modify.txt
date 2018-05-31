@@ -1,0 +1,160 @@
+-----------------------------------------------2017.09.11-----------------------------------------------
+1.person_info增加离职状态后的表注释
+
+ALTER TABLE person_info MODIFY COLUMN state int COMMENT '状态,-1待审核，0删除，1正常（审核通过）2审核驳回 4维护 5离职';
+
+2.salary_detail增加字段
+
+alter table salary_detail add other_item1 decimal(10,2) DEFAULT Null;
+alter table salary_detail add other_item2 decimal(10,2) DEFAULT Null;
+alter table salary_detail add other_item3 decimal(10,2) DEFAULT Null;
+
+3.salary_detail增加字段后的注释
+
+ALTER TABLE salary_detail MODIFY COLUMN other_item1 decimal COMMENT '其他项目1'
+ALTER TABLE salary_detail MODIFY COLUMN other_item2 decimal COMMENT '其他项目2'
+ALTER TABLE salary_detail MODIFY COLUMN other_item3 decimal COMMENT '其他项目3'
+-----------------------------------------------2017.09.12-----------------------------------------------
+1.创建表attendance_year_new
+
+CREATE TABLE `attendance_year_new` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '员工id(person_info的人员id)',
+  `lateEarly_times` varchar(255) DEFAULT NULL COMMENT '迟到早退次数',
+  `absenteeism_hours` varchar(255) DEFAULT NULL COMMENT '旷工时数',
+  `overtime_hours` varchar(255) DEFAULT NULL COMMENT '加班时数',
+  `out_days` varchar(255) DEFAULT NULL COMMENT '出差天数',
+  `year_vacation_total` varchar(255) DEFAULT NULL COMMENT '年假总天数',
+  `year_vacation_pass` varchar(255) DEFAULT NULL COMMENT '已修年假',
+  `year_vacation_rest` varchar(255) DEFAULT NULL COMMENT '未休年假',
+  `ill_vacation` varchar(255) DEFAULT NULL COMMENT '病假',
+  `trouble_vacation` varchar(255) DEFAULT NULL COMMENT '事假',
+  `overtime_vacation` varchar(255) DEFAULT NULL COMMENT '加班调休',
+  `visit_relatives_vacation` varchar(255) DEFAULT NULL COMMENT '探亲假',
+  `marriage_vacation` varchar(255) DEFAULT NULL COMMENT '婚假',
+  `funeral_vacation` varchar(255) DEFAULT NULL COMMENT '丧假',
+  `maternity_leave` varchar(255) DEFAULT NULL COMMENT '产假',
+  `antenatal_leave` varchar(255) DEFAULT NULL COMMENT '产检假',
+  `paternity_leave` varchar(255) DEFAULT NULL COMMENT '陪产假',
+  `lactation_leave` varchar(255) DEFAULT NULL COMMENT '哺乳假',
+  `other_vacation` varchar(255) DEFAULT NULL COMMENT '其他假期',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `person_state` int(11) DEFAULT NULL COMMENT '员工状态1正常/2病假/3产假',
+  `attendance_day` varchar(255) DEFAULT NULL COMMENT '出勤天数',
+  `state_judge` int(11) DEFAULT NULL COMMENT '状态判定  1正常/2扣食堂费用/3扣工资/4扣工资+食堂费用',
+  `att_detail` varchar(200) DEFAULT NULL COMMENT '考勤明细',
+  `state` int(11) DEFAULT NULL COMMENT '1正常0停用',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_id` bigint(20) DEFAULT NULL,
+  `update_id` bigint(20) DEFAULT NULL,
+  `year` int(11) DEFAULT NULL COMMENT '年份',
+  `name` varchar(20) DEFAULT NULL COMMENT '姓名',
+  `dept_id` int(11) DEFAULT NULL COMMENT '部门id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1386 DEFAULT CHARSET=utf8mb4 COMMENT='考勤年度报表';
+
+////////////////////////////////////////////////////////////////////忽略2017.09.20日操作///////////////////////////////////////////////////////
+//////////////////////////////////-----------------------------------------------2017.09.20-----------------------------------------------/////
+//////////////////////////////////1.修改zb_hr数据库salary_detail表中other_item1,other_item2,other_item3,三个字段的类型{int-->decimal(10,2)}////
+//////////////////////////////////
+//////////////////////////////////alter table salary_detail modify column other_item1 decimal(10,2);////////////////////////////////////////////
+//////////////////////////////////alter table salary_detail modify column other_item2 decimal(10,2);////////////////////////////////////////////
+//////////////////////////////////alter table salary_detail modify column other_item3 decimal(10,2);/////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////忽略2017.09.22日操作/////////////////////////////////////////////////////////
+////////////////////////////////////-----------------------------------------------2017.09.22-----------------------------------------------/////
+////////////////////////////////////1.修改attendance_year_new表attendance_day字段为verchar////////////////////////////////////////////////////////
+////////////////////////////////////alter table attendance_year_new modify column attendance_day varchar(255);////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+-----------------------------------------------2017.09.26-----------------------------------------------
+1.创建表`tb_user_notice` 
+CREATE TABLE `tb_user_notice` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '员工id(person_info的人员id)',
+	`name` varchar(20) DEFAULT NULL COMMENT '姓名',
+  `dept_id` int(11) DEFAULT NULL COMMENT '部门id',
+	`year` int(11) DEFAULT NULL COMMENT '年份',
+  `month` int(11) DEFAULT NULL COMMENT '月份',
+	`remark` varchar(200) DEFAULT NULL COMMENT '备注',
+	`notice_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `create_id` bigint(20) DEFAULT NULL,
+  `update_id` bigint(20) DEFAULT NULL,
+	`state` int(11) DEFAULT NULL COMMENT '状态,0删除，1正常 -1 进行提醒',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1386 DEFAULT CHARSET=utf8mb4 COMMENT='转正提醒表';
+
+-----------------------------------------------2017.10.16-----------------------------------------------
+
+INSERT INTO sys_authority_tb VALUES(
+25,"离退休人员名单","/staff/dimissionList",NULL,"",NULL,"false","1",NULL,"25;2;",6,2,"true","menu","","dimission_list"
+
+
+
+)
+
+-----------------------------------------------2017.10.25-----------------------------------------------
+
+1.
+UPDATE sys_authority_tb
+SET `name` = "内部培训"
+WHERE `name` = "培训过程"
+
+2.train_manager表增加notification_file字段:文件路径
+
+alter table train_manager add notification_file varchar(50) DEFAULT Null;
+
+3.tb_user_contract表增加attachment_url字段:文件路径
+
+alter table tb_user_contract add attachment_url varchar(50) DEFAULT Null;
+
+4.tb_user_contract表增加attachment_photo字段:文件内容
+
+alter table tb_user_contract add attachment_photo BLOB DEFAULT NULL;
+
+5.tb_user_contract表增加attachment_name字段:文件名
+
+alter table tb_user_contract add user_name varchar(50) DEFAULT Null;
+-----------------------------------------------2017.10.27-----------------------------------------------
+1.tb_index_assess增加year字段:年份
+
+alter table tb_index_assess add year BIGINT(20) DEFAULT Null;
+
+2.tb_assess_last增加year字段:年份
+
+alter table tb_assess_last add year BIGINT(20) DEFAULT Null;
+
+-----------------------------------------------2017.11.07-----------------------------------------------
+
+1.修改tb_user_contract表attachment_photo字段:可存储大文件
+
+alter table tb_user_contract MODIFY attachment_photo longblob DEFAULT Null;
+
+2.train_manager表增加notification_filecontent字段:通知文件内容
+
+alter table train_manager ADD notification_filecontent longblob DEFAULT Null;
+
+3.train_manager表增加notification_filename字段:通知文件名字
+
+alter table train_manager add notification_filename varchar(200) DEFAULT Null;
+
+-----------------------------------------------2017.11.09-----------------------------------------------
+
+1.修改train_manager表notification_file字段:可存储大路径
+
+alter table train_manager modify column notification_file varchar(200);
+
+-----------------------------------------------2017.11.14-----------------------------------------------
+1.在“员工花名册-考核奖励-考核情况”中，所有人的“年度绩效考核量化评分表”前添加“年份”为“2016年”
+UPDATE tb_index_assess tia SET tia.`year` = 2016
+WHERE  tia.assess_name LIKE "%年度绩效考核量化评分表%"
+
+-----------------------------------------------2017.11.15-----------------------------------------------
+
+1.修改tb_user_contract表attachment_url字段:可存储大路径
+
+alter table tb_user_contract modify column attachment_url varchar(200);

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Title</title>
+</head>
+<body>
+<h1 style="color: blue">进入到这个页面就是经过了验证的validate</h1>
+<tr th:each="clllect,it:${list}}">
+    <th scope="row" th:text="${collect.id}}"></th>
+    <th scope="row" th:text="${collect.nameH}}"></th>
+</tr>
+</body>
+</html>
