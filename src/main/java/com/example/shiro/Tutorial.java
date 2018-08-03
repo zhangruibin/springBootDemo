@@ -32,7 +32,7 @@ public class Tutorial {
         if (!currentUser.isAuthenticated()){
             UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken("hehe", "hehe");
             usernamePasswordToken.setRememberMe(true);
-            logger.info("User ["+currentUser.getPrincipal() + "] loggered in successfully");
+            logger.info("User2 ["+currentUser.getPrincipal() + "] loggered in successfully");
             if (currentUser.hasRole("client")){
                 logger.info("LOok is in your role");
             }else {

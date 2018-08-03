@@ -25,12 +25,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+      /*  http.authorizeRequests()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/gbin1schedule")
-                .defaultSuccessUrl("/gbin1schedule").failureUrl("/login?form").permitAll()
+                //.and().formLogin().loginPage("/gbin1schedule")
+               //*//**//* .defaultSuccessUrl("/gbin1schedule").failureUrl("/login?form").permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll();*/
     }
 }

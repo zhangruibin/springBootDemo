@@ -35,13 +35,13 @@ public class WebController extends WebMvcConfigurerAdapter{
         if (bindingResult.hasErrors()) {
             return "form";
         }
-        User user = new User();
+        User2 user = new User2();
         user.setId(1);
         user.setName("zhangsan");
-        User user1 = new User();
+        User2 user1 = new User2();
         user.setId(2);
         user.setName("zhangsan2");
-        List<User> list = new ArrayList<>();
+        List<User2> list = new ArrayList<>();
         list.add(user);
         list.add(user1);
         return "redirect:/results";

@@ -1,11 +1,14 @@
 package com.example.controller;
 
-import ch.qos.logback.classic.Logger;
+
+import com.alibaba.druid.support.logging.LogFactory;
 import com.example.entity.Book;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +26,7 @@ import java.util.*;
 @Api(value = "图书管理")
 @RequestMapping(value = "/books")
 public class BookContrller {
-   private Logger log;
+   private static Logger logger = LoggerFactory.getLogger(BookContrller.class);
     Map<Long, Book> books = Collections.synchronizedMap(new HashMap<Long, Book>());
 
     @ApiOperation(value="获取图书列表", notes="获取图书列表")
@@ -78,15 +81,25 @@ public class BookContrller {
     @RequestMapping(value = "/testjava8", method = RequestMethod.GET)
     public String testJava8(){
         String s = "this is just for test java811";
-        new Thread(()->System.out.println(s)).start();
-       new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Before Java8, too much code for too little to do");
-            }
-        }).start();
-
-        return s;
+        try {
+            //s = "this is just for test java811";
+            new Thread(()->System.out.println(s)).start();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        int testInt = Integer.parseInt(s);
+                        logger.error("Test post Email to own emailAddr!");
+                    }catch (Exception e){
+                        logger.error("Test post Email to own emailAddr!");
+                    }
+                    System.out.println("Before Java8, too much code for too little to do");
+                }
+            }).start();
+            return s;
+        }catch (Exception e){
+            throw new RuntimeException("Test post Email to own emailAddr!");
+        }
     }
    /* @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {

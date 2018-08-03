@@ -1,7 +1,6 @@
-package com.example.demo;
+package com.example.demo.personalDemo;
 
 import com.example.service.RuleDao;
-import com.sun.deploy.net.protocol.ProtocolType;
 import io.swagger.annotations.Scope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,45 +1,40 @@
 package com.example.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
- * Created by zhangrui on 2017/11/22.
+ * Created by zhangrui on 2017/10/18.
  */
-@JsonIgnoreProperties(ignoreUnknown = false)
+@Configuration
+@PropertySource(value = "classpath:test.properties")
+@ConfigurationProperties(prefix = "com.zrb")
 public class User {
     private String name;
-    private String blog;
-    private Integer id ;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBlog(String blog) {
-        this.blog = blog;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private int age;
 
     public String getName() {
         return name;
     }
 
-    public String getBlog() {
-        return blog;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "User2{" +
-                "name='" + name + '\'' +
-                ", blog='" + blog + '\'' +
-                '}';
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public User() {
     }
 }

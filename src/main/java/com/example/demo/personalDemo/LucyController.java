@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  *//*
 
 @RestController
-@EnableConfigurationProperties({ConfigBean.class, User.class})
+@EnableConfigurationProperties({ConfigBean.class, User2.class})
 public class LucyController {
     */
 /**
@@ -34,7 +34,7 @@ public class LucyController {
      *//*
 
     @Autowired
-    User user;
+    User2 user;
     @RequestMapping(value = "/user")
     public String user(){
         return user.getName()+user.getAge();
