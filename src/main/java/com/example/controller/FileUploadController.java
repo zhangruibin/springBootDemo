@@ -28,7 +28,7 @@ public class FileUploadController {
     @RequestMapping("/hello")
     public String helloHtml(HashMap<String, Object> map) {
         map.put("hello", "欢迎进入HTML页面");
-        return "/test";
+        return "view/index";
     }
     @GetMapping("/1")
     public String listUploadedFiles(Model model) throws IOException {
