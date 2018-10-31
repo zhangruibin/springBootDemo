@@ -19,3 +19,5 @@ mybatis:
   type-aliases-package: com.example.entity
   #config-location: classpath*:mybatis/*Mapper.xml
   mapper-locations: classpath*:mybatis/*Mapper.xml
+testPropertyBean:
+  testPropertyParam1: this is from property
