@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
  * Created by zhangrui on 2018/1/9.
  */
 public class Thread1 implements Runnable {
-    private  static final int MAX_PRODUCT  = 9;
+private  static final int MAX_PRODUCT  = 9;
     volatile String s = "";
     Object lock;
     ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
