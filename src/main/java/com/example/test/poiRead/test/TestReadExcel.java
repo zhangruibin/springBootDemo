@@ -400,4 +400,7 @@ public class TestReadExcel {
 
         }
     }
+    public static void test(){
+        Map map = new HashMap();
+    }
 }

@@ -2,7 +2,11 @@ package com.example.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.entity.Book;
-import com.example.entity.OrderStatusEnum;
+/*import com.example.entity.OrderStatusEnum;
+import com.example.entity.test1.ActivityInfo;
+import com.example.entity.test1.ActivityInterfaceBiz;
+import com.example.entity.test1.ActivityInterfaceHead;
+import com.example.entity.test1.ActivityRequestResult;*/
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.map.HashedMap;
@@ -11,10 +15,12 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -40,8 +46,8 @@ public class TestD3 {
         map.put("hello", "欢迎进入HTML页面");
         return "view/index";
     }
-    @RequestMapping("/second")
-    public String secondD3Html(HashMap<String, Object> map) {
+    //@RequestMapping("/second")
+    /*public String secondD3Html(HashMap<String, Object> map) {
         map.put("hello", "欢迎进入HTML页面");
         //log.info("这是使用@Slf4j注解进行异步打印的日志！");
         String jsonString = "{\n" +
@@ -82,10 +88,68 @@ public class TestD3 {
         //测试从文件之中进行数据的读取
         testValue(aaaa);
         OrderStatusEnum orderStatusEnum = OrderStatusEnum.valueOf(OrderStatusEnum.PRE_CHECKOUT_FAILURE.toString());
-        String s1 = orderStatusEnum.toString("00000");
-        System.out.println("s1_______________________"+s1);
+        //String s1 = orderStatusEnum.toString("00000");
+        //System.out.println("s1_______________________"+s1);
         return "view/index2";
-    }
+    }*/
+    /*@ResponseBody
+    @RequestMapping(value = "/second", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public JSONObject createActivity(@RequestBody ActivityRequestResult<ActivityInterfaceHead,ActivityInterfaceBiz> activityRequestResult) throws Throwable {
+        ActivityInfo activityInfo = new ActivityInfo();
+        JSONObject jsonResult = new JSONObject();
+        JSONObject head = new JSONObject();
+        JSONObject biz = new JSONObject();
+        String partResult;
+        head.put("transactionId","S000011410152301988989769ac044a6a52885475707c30d");
+        head.put("resTime","");
+        head.put("code","");
+        head.put("err",null);
+        head.put("attach","hello, 189.cn");
+        //返回结果集合
+        //设置返回值
+        List<ActivityInfo> activityInfoList;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            if (!"4".equals(activityRequestResult.getBiz().getVerifyStatus()) ){
+                head.put("err","非审核通过状态！");
+                head.put("code","1");
+            }else {
+                activityInfo .setActivityCode(activityRequestResult.getBiz().getActivityId());
+                activityInfo.setActivityBeginDate(sdf.parse(activityRequestResult.getBiz().getActivityBeginDate()));
+                activityInfo.setActivityEndDate(sdf.parse(activityRequestResult.getBiz().getActivityEndDate()));
+                activityInfo.setActivityName(activityRequestResult.getBiz().getActivityName());
+                activityInfo.setPartnerId(activityRequestResult.getBiz().getPartnerId());
+                activityInfo.setVerifyStatus(activityRequestResult.getBiz().getVerifyStatus());
+                activityInfo.setPartnerName(activityRequestResult.getBiz().getPartnerName());
+                //activityInfoList = activityService.selcetActivityInfoList1(activityInfo);
+            *//*    if (activityInfoList.size() > 0){
+                    if (activityInfoList.get(0).getStatus().equals(activityRequestResult.getBiz().getReleaseStatus())){
+                        head.put("err","已有此活动信息，且信息一致，请重新核对数据！");
+                        head.put("code","1");
+                    }else {
+                        activityInfo.setStatus(activityRequestResult.getBiz().getReleaseStatus());
+                        activityInfo.setId(activityInfoList.get(0).getId());
+                        //activityService.updateActivityInfo(activityInfo);
+                        partResult = "1".equals(activityRequestResult.getBiz().getReleaseStatus())?"上架！":"下架！";
+                        head.put("err","成功将活动状态更新为" + partResult);
+                        head.put("code","0");
+                    }
+                }else {
+                    //activityService.insertActivity(activityInfo);
+                    head.put("err","新建拉新活动信息成功！");
+                    head.put("code","0");
+                }*//*
+            }
+        }catch (Exception e){
+            head.put("err","接口异常，请联系管理员！");
+            head.put("code","1");
+            e.printStackTrace();
+        }finally {
+            jsonResult.put("head",head);
+            jsonResult.put("biz",null);
+            return jsonResult;
+        }
+    }*/
     @Value("${pcacmgr.publicCertFilePath}")
     public static void testValue(String aa){
         Book book = new Book();
