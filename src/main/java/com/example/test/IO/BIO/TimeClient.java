@@ -26,7 +26,7 @@ public class TimeClient {
             writer = new PrintWriter(client.getOutputStream());
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-            while (true){//每隔5秒发送一次请求
+            while (true){
                 if (count.getAndIncrement()% 3 == 0 ){
                     writer.println("GET CURRENT TIME");
                 }else {
