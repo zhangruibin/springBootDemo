@@ -20,8 +20,8 @@ public class TestCreateImg {
     public static void main(String[] args) throws Exception {
 
         //生成带logo 的二维码
-        String text = "这就是在测试????";
-        QRCodeUtil.encode(text, "zxingTempImg/苏勇.jpg"   , "d:/tempImg", true);
+        //String text = "魏苗培魏宇鑫";
+        QRCodeUtil.encode("魏苗培魏宇鑫", "zxingTempImg/1111.png"   , "d:/tempImg", true);
 
         /*//生成不带logo 的二维码
         String textt = "http://www.baidu.com";
